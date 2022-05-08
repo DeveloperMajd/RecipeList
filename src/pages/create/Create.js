@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch";
 import "./Create.css";
+import { useTheme } from "../../hooks/useTheme";
 
 export default function Create() {
   const [title, setTitle] = useState("");
@@ -12,10 +13,7 @@ export default function Create() {
   const ingredientInput = useRef(null);
   const history = useHistory();
 
-  const { postData, data } = useFetch(
-    "http://localhost:3000/recipes",
-    "POST"
-  );
+  const { postData, data } = useFetch("http://localhost:3000/recipes", "POST");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,8 +42,9 @@ export default function Create() {
     }
   }, [data, history]);
 
+  const { mode, color } = useTheme();
   return (
-    <div className="create">
+    <div className={`create ${mode}`}>
       <h2 className="page-title">Add a New Recipe</h2>
       <form onSubmit={handleSubmit}>
         <label>
@@ -54,6 +53,7 @@ export default function Create() {
             type="text"
             onChange={(e) => setTitle(e.target.value)}
             required
+            style={{ outlineColor: color }}
           />
         </label>
         <label>
@@ -66,8 +66,13 @@ export default function Create() {
               }}
               value={newIngredient}
               ref={ingredientInput}
+              style={{ outlineColor: color }}
             />
-            <button className="btn" onClick={handleAdd}>
+            <button
+              className="btn"
+              onClick={handleAdd}
+              style={{ background: color }}
+            >
               add
             </button>
           </div>
@@ -84,6 +89,7 @@ export default function Create() {
             onChange={(e) => setMethod(e.target.value)}
             value={method}
             required
+            style={{ outlineColor: color }}
           />
         </label>
         <label>
@@ -93,9 +99,12 @@ export default function Create() {
             onChange={(e) => setCookingTime(e.target.value)}
             value={cookingTime}
             required
+            style={{ outlineColor: color }}
           />
         </label>
-        <button className="btn">Submit</button>
+        <button className="btn" style={{ background: color }}>
+          Submit
+        </button>
       </form>
     </div>
   );

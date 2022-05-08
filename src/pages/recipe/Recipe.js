@@ -2,7 +2,7 @@ import "./Recipe.css";
 import { useParams } from "react-router";
 import { useFetch } from "../../hooks/useFetch";
 import React from "react";
-
+import { useTheme } from "../../hooks/useTheme";
 export default function Recipe() {
   const { id } = useParams();
   const {
@@ -10,9 +10,9 @@ export default function Recipe() {
     isPending,
     data: recipe,
   } = useFetch(`http://localhost:3000/recipes/${id}`);
-
+  const { mode } = useTheme();
   return (
-    <div className="recipe">
+    <div className={`recipe ${mode}`}>
       {error && <p className="error">{error}</p>}
       {isPending && <p className="loading">Loading...</p>}
       {recipe && (

@@ -30,3 +30,9 @@
 .ingredients button {
   margin: 0 0 0 10px;
 }
+
+.create.dark .page-title,
+.create.dark span,
+.create.dark p {
+  color: #e4e4e4;
+}

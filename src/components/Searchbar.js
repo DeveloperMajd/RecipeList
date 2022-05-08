@@ -2,6 +2,7 @@ import "./Searchbar.css";
 
 import { useState } from "react";
 import { useHistory } from "react-router";
+import { useTheme } from "../hooks/useTheme";
 
 export default function Searchbar() {
   const [term, setTerm] = useState("");
@@ -12,6 +13,8 @@ export default function Searchbar() {
 
     history.push(`/search?q=${term}`);
   };
+  const { color } = useTheme();
+
   return (
     <div className="searchbar">
       <form onSubmit={handleSubmit}>
@@ -21,6 +24,7 @@ export default function Searchbar() {
           id="search"
           onChange={(e) => setTerm(e.target.value)}
           value={term}
+          style={{ outlineColor: color }}
         />
       </form>
     </div>
