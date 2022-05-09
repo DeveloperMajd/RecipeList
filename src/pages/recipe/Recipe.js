@@ -13,8 +13,8 @@ export default function Recipe() {
   const { mode } = useTheme();
   return (
     <div className={`recipe ${mode}`}>
-      {error && <p className="error">{error}</p>}
-      {isPending && <p className="loading">Loading...</p>}
+      {error && <p className={`error ${mode}`}>{error}</p>}
+      {isPending && <p className={`loading ${mode}`}>Loading...</p>}
       {recipe && (
         <React.Fragment>
           <h2 className="page-title">{recipe.title}</h2>
